@@ -144,7 +144,7 @@ def get_custom_urls(lines: list[str]) -> list[str]:
 
 def update_from_string(path_string: str, string: list[str]):
     path = Path(path_string)
-    if not path.is_dir:
+    if not path.is_dir():
         raise FileNotFoundError(f"{repr(path_string)} is not a path")
     mods = get_mods(string)
     urls = get_custom_urls(string)
