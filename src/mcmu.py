@@ -222,7 +222,6 @@ def main():
             lines = file.read().splitlines()
         if not lines:
             raise ValueError("Missing mod folder path in './mcmu.txt'")
-        print(lines)
         update_from_string(lines.pop(0), lines)
     except Exception as error:
         traceback.print_exc()
