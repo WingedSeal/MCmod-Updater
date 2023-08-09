@@ -35,4 +35,7 @@ https://github.com/WingedSeal/MCmod-Updater/releases/download/v0.1.0/mcmu.py
 
 ## Note:
 This program requires `requests` python library
-`pip install requests`
+
+```
+pip install requests
+```
