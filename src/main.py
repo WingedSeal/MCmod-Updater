@@ -214,7 +214,7 @@ def main():
             print("Missing './mcmu.txt'")
             return
         with config_file.open("r") as file:
-            lines = file.readlines()
+            lines = file.readline().splitlines()
         if not lines:
             raise ValueError("Missing mod folder path in './mcmu.txt'")
         update_from_string(lines.pop(0), lines)
