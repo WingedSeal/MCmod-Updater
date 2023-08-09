@@ -1,5 +1,6 @@
 from getpass import getpass
 from pathlib import Path
+import traceback
 from typing import Any
 import threading
 import requests
@@ -211,10 +212,10 @@ def main():
         with config_file.open("r") as file:
             lines = file.readlines()
         update_from_string(lines.pop(0), lines)
-    except Exception:
-        pass
+    except Exception as error:
+        traceback.print_exc()
 
-    getpass()
+    getpass("")
 
 
 if __name__ == "__main__":
