@@ -15,7 +15,7 @@ GITHUB_URL
 GITHUB_URL
 ```
 
-`pre` is for downloading full release of the mod
+`pre` is for downloading pre release of the mod
 
 ## Example
 ```txt
