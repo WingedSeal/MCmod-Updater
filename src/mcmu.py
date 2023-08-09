@@ -96,6 +96,7 @@ def _normalize(string: str) -> str:
     )])
     string = string.replace("beta", "")
     string = string.replace("alpha", "")
+    string = string.replace("release", "")
     return string
 
 
@@ -188,7 +189,7 @@ def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
             if custom_url.endswith(mod_file.name):
                 print(f"{mod_file.name} is already up to date.")
                 break
-            if _normalize(custom_url) == _normalize(mod_file.name):
+            if _normalize(mod_file.name) in _normalize(custom_url):
                 mod_file.unlink()
                 mod_count += 1
                 _thread = threading.Thread(
