@@ -41,21 +41,23 @@ class MinecraftMod:
     def get_github_api_url(self) -> str:
         return f"https://api.github.com/repos/{self.user_name}/{self.repo_name}/releases"
 
-    def handle_request_fail(self):
-        # TODO: Handle fails
-        pass
+    def handle_request_fail(self, url: str, code: int):
+        raise InvalidUrlException(f"Request failed with code: {code} ({url})")
 
     def request_releases_json(self) -> Any | None:
         if self.is_pre_release:
             response = requests.get(self.get_github_api_url())
             if response.status_code != 200:
-                self.handle_request_fail()
+                self.handle_request_fail(
+                    self.get_github_api_url(), response.status_code)
                 return None
             return response.json()[0]["assets"][0]
 
         response = requests.get(self.get_github_api_url() + "/latest")
         if response.status_code != 200:
-            self.handle_request_fail()
+            self.handle_request_fail(
+                self.get_github_api_url() + "/latest",
+                response.status_code)
             return None
         return response.json()["assets"][0]
 
@@ -75,16 +77,16 @@ class MinecraftMod:
     def from_github_url(cls, github_url: str, is_pre_release=False):
         github_url = github_url.replace("https://", "")
         if not github_url.startswith("github.com/"):
-            # TODO:
-            raise InvalidUrlException("")
+            raise InvalidUrlException(
+                f"'{github_url}' is not a valid github link")
         github_url = github_url.replace("github.com/", "")
         try:
             urls = github_url.split("/")
             user = urls[0]
             repo = urls[1]
         except Exception as e:
-            # TODO:
-            raise InvalidUrlException("") from e
+            raise InvalidUrlException(
+                f"'{github_url}' is not a valid github link") from e
         return cls(user, repo, is_pre_release)
 
 
