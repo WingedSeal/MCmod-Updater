@@ -1,3 +1,4 @@
+from getpass import getpass
 from pathlib import Path
 from typing import Any
 import threading
@@ -209,6 +210,7 @@ def main():
     with config_file.open("r") as file:
         lines = file.readlines()
     update_from_string(lines.pop(0), lines)
+    getpass()
 
 
 if __name__ == "__main__":
