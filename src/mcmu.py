@@ -157,6 +157,7 @@ def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
     mod_count = 0
 
     def handle_mod(mod: MinecraftMod):
+        nonlocal mod_count
         for mod_file in mod_files:
             if mod.download_link.endswith(mod_file.name):
                 print(f"{mod_file.name} is already up to date.")
@@ -182,6 +183,7 @@ def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
         handle_mod(mod)
 
     def handle_url(custom_url: str):
+        nonlocal mod_count
         for mod_file in mod_files:
             if custom_url.endswith(mod_file.name):
                 print(f"{mod_file.name} is already up to date.")
