@@ -203,13 +203,17 @@ def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
 
 
 def main():
-    config_file = Path(CONFIG_PATH)
-    if not config_file.is_file():
-        print("Missing './mcmu.txt'")
-        return
-    with config_file.open("r") as file:
-        lines = file.readlines()
-    update_from_string(lines.pop(0), lines)
+    try:
+        config_file = Path(CONFIG_PATH)
+        if not config_file.is_file():
+            print("Missing './mcmu.txt'")
+            return
+        with config_file.open("r") as file:
+            lines = file.readlines()
+        update_from_string(lines.pop(0), lines)
+    except Exception:
+        pass
+
     getpass()
 
 
