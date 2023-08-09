@@ -26,6 +26,15 @@ pre https://github.com/BiscuitDevelopment/SkyblockAddons
 pre https://github.com/Skytils/SkytilsMod
 pre https://github.com/Soopyboo32/SoopyV2Forge
 pre https://github.com/hannibal002/SkyHanni
-url https://cdn.discordapp.com/attachments/952944284150149151/1137619027791974430/SkyblockExtras-2.2.0-pre16-RELEASE.jar
 url https://cdn.discordapp.com/attachments/1028896920346841118/1134499760989020332/NotEnoughUpdates-2.1.1-Alpha-19.jar
+```
+
+## Download Link: 
+https://github.com/WingedSeal/MCmod-Updater/releases/download/v0.1.0/mcmu.py
+
+## Note:
+This program requires `requests` python library
+
+```
+pip install requests
 ```
