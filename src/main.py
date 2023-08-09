@@ -144,6 +144,8 @@ def get_custom_urls(lines: list[str]) -> list[str]:
 
 def update_from_string(path_string: str, string: list[str]):
     path = Path(path_string)
+    if not path.is_dir:
+        raise FileNotFoundError(f"{repr(path_string)} is not a path")
     mods = get_mods(string)
     urls = get_custom_urls(string)
     update(path, mods, urls)
@@ -211,6 +213,8 @@ def main():
             return
         with config_file.open("r") as file:
             lines = file.readlines()
+        if not lines:
+            raise ValueError("Missing mod folder path in './mcmu.txt'")
         update_from_string(lines.pop(0), lines)
     except Exception as error:
         traceback.print_exc()
