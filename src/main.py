@@ -204,6 +204,8 @@ def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
     for thread in download_queue:
         thread.join()
 
+    print(f"Finished downloading {len(mod) + len(custom_urls)}")
+
 
 def main():
     try:
