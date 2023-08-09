@@ -154,6 +154,7 @@ def update_from_string(path_string: str, string: list[str]):
 def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
     mod_files = [path for path in mod_folder.iterdir() if path.is_file()]
     download_queue: list[threading.Thread] = []
+    mod_count = 0
 
     def handle_mod(mod: MinecraftMod):
         for mod_file in mod_files:
@@ -162,6 +163,7 @@ def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
                 break
             if mod.is_same_mod(mod_file.name):
                 mod_file.unlink()
+                mod_count += 1
                 _thread = threading.Thread(
                     target=mod.download,
                     args=(mod_folder,))
@@ -169,6 +171,7 @@ def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
                 _thread.start()
                 break
         else:
+            mod_count += 1
             _thread = threading.Thread(
                 target=mod.download,
                 args=(mod_folder,))
@@ -185,6 +188,7 @@ def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
                 break
             if _normalize(custom_url) == _normalize(mod_file.name):
                 mod_file.unlink()
+                mod_count += 1
                 _thread = threading.Thread(
                     target=download_custom,
                     args=(custom_url, mod_folder))
@@ -192,6 +196,7 @@ def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
                 _thread.start()
                 break
         else:
+            mod_count += 1
             _thread = threading.Thread(
                 target=download_custom,
                 args=(custom_url, mod_folder))
@@ -204,7 +209,7 @@ def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
     for thread in download_queue:
         thread.join()
 
-    print(f"Finished downloading {len(mods) + len(custom_urls)} mod(s)")
+    print(f"Finished updating {len(mods) + len(custom_urls)} mod(s) ({mod_count} downloaded)")
 
 
 def main():
@@ -214,9 +219,10 @@ def main():
             print("Missing './mcmu.txt'")
             return
         with config_file.open("r") as file:
-            lines = file.readline().splitlines()
+            lines = file.read().splitlines()
         if not lines:
             raise ValueError("Missing mod folder path in './mcmu.txt'")
+        print(lines)
         update_from_string(lines.pop(0), lines)
     except Exception as error:
         traceback.print_exc()
