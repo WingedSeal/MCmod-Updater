@@ -3,11 +3,7 @@ from typing import Any
 import threading
 import requests
 
-FILE = """
-pre https://github.com/hannibal002/SkyHanni
-pre https://github.com/Skytils/SkytilsMod
-url https://cdn.discordapp.com/attachments/1028896920346841118/1134499760989020332/NotEnoughUpdates-2.1.1-Alpha-19.jar
-"""
+CONFIG_PATH = "./mcmu.txt"
 
 
 class InvalidUrlException(ValueError):
@@ -144,11 +140,10 @@ def get_custom_urls(lines: list[str]) -> list[str]:
     return urls
 
 
-def update_from_string(path_string: str, string: str):
+def update_from_string(path_string: str, string: list[str]):
     path = Path(path_string)
-    lines = string.split("\n")
-    mods = get_mods(lines)
-    urls = get_custom_urls(lines)
+    mods = get_mods(string)
+    urls = get_custom_urls(string)
     update(path, mods, urls)
 
 
@@ -204,3 +199,17 @@ def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
 
     for thread in download_queue:
         thread.join()
+
+
+def main():
+    config_file = Path(CONFIG_PATH)
+    if not config_file.is_file():
+        print("Missing './mcmu.txt'")
+        return
+    with config_file.open("r") as file:
+        lines = file.readlines()
+    update_from_string(lines.pop(0), lines)
+
+
+if __name__ == "__main__":
+    main()
