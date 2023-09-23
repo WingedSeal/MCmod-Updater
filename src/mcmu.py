@@ -136,10 +136,21 @@ def get_mods(lines: list[str]) -> list[MinecraftMod]:
 def get_custom_urls(lines: list[str]) -> list[str]:
     urls: list[str] = []
     for line in lines:
-        if not line.startswith("url "):
-            continue
-        line = line[4:]
-        urls.append(line)
+        if line.startswith("url "):
+            line = line[4:]
+            urls.append(line)
+
+        if line == "neu":
+            SKYCLIENT_NEU = "https://raw.githubusercontent.com/SkyblockClient/SkyblockClient-REPO/main/files/mods.json"
+            response = requests.get(SKYCLIENT_NEU)
+            if response.status_code != 200:
+                raise InvalidUrlException(
+                    f"Request failed with code: {response.status_code} ({SKYCLIENT_NEU})")
+            for _mod in response.json():
+                if _mod["id"] != "neu":
+                    continue
+                urls.append(urls["url"])
+
     return urls
 
 
@@ -212,7 +223,8 @@ def update(mod_folder: Path, mods: list[MinecraftMod], custom_urls: list[str]):
     for thread in download_queue:
         thread.join()
 
-    print(f"Finished updating {len(mods) + len(custom_urls)} mod(s) ({mod_count} downloaded)")
+    print(
+        f"Finished updating {len(mods) + len(custom_urls)} mod(s) ({mod_count} downloaded)")
 
 
 def main():
