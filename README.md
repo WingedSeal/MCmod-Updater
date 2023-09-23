@@ -13,9 +13,11 @@ url CUSTOM_URL
 GITHUB_URL
 GITHUB_URL
 GITHUB_URL
+neu
 ```
 
 `pre` is for downloading pre release of the mod
+`neu` is customized for NEU since they do not release their mods on Github
 
 ## Example
 ```txt
@@ -26,7 +28,7 @@ pre https://github.com/BiscuitDevelopment/SkyblockAddons
 pre https://github.com/Skytils/SkytilsMod
 pre https://github.com/Soopyboo32/SoopyV2Forge
 pre https://github.com/hannibal002/SkyHanni
-url https://cdn.discordapp.com/attachments/1028896920346841118/1134499760989020332/NotEnoughUpdates-2.1.1-Alpha-19.jar
+neu
 ```
 
 ## Download Link: 
