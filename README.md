@@ -18,7 +18,7 @@ neu
 
 `pre` is for downloading pre release of the mod
 
-`neu` is customized for [NEU](https://github.com/Moulberry/NotEnoughUpdates/releases), popular Hypixel Skyblock mod, since they do not release their mods on Github
+`neu` is customized for [NEU](https://github.com/Moulberry/NotEnoughUpdates/releases), popular Hypixel Skyblock mod, since they do not release their mod on Github
 
 ## Example
 ```txt
