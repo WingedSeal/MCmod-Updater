@@ -149,7 +149,7 @@ def get_custom_urls(lines: list[str]) -> list[str]:
             for _mod in response.json():
                 if _mod["id"] != "neu":
                     continue
-                urls.append(urls["url"])
+                urls.append(_mod["url"])
 
     return urls
 
