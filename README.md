@@ -33,7 +33,7 @@ neu
 ```
 
 ## Download Link: 
-https://github.com/WingedSeal/MCmod-Updater/releases/download/latest/mcmu.py
+https://github.com/WingedSeal/MCmod-Updater/releases/download/release/latest
 
 ## Note:
 This program requires `requests` python library
