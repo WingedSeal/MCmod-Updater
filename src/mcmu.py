@@ -90,13 +90,12 @@ class MinecraftMod:
 
 def _normalize(string: str) -> str:
     string = "".join([char for char in string.lower() if (
-        char not in {"-", ".", " ", "_"}
-        and
-        not char.isdigit()
+        char.isalpha()
     )])
     string = string.replace("beta", "")
     string = string.replace("alpha", "")
     string = string.replace("release", "")
+    string = string.replace("pre", "")
     return string
 
 
